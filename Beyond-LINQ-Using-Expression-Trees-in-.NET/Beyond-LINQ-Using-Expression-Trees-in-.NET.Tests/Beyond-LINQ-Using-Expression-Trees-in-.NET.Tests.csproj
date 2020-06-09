@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netcoreapp3.1</TargetFramework>
+        <RootNamespace>Beyond_LINQ_Using_Expression_Trees_in_.NET.Tests</RootNamespace>
+
+        <IsPackable>false</IsPackable>
+    </PropertyGroup>
+    <ItemGroup>
+        <PackageReference Include="BenchmarkDotNet" Version="0.12.1" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Moq" Version="3.1.416.3" />
+    </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
+        <PackageReference Include="xunit" Version="2.4.0" />
+        <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
+        <PackageReference Include="coverlet.collector" Version="1.2.0" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="..\Beyond-LINQ-Using-Expression-Trees-in-.NET.React\Beyond-LINQ-Using-Expression-Trees-in-.NET.React.csproj" />
+    </ItemGroup>
+
+</Project>
