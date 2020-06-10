@@ -5,13 +5,27 @@ export class FilteringSorting extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { data: [], loading: true };
+    this.state = { 
+      data: [], 
+      filter: {
+        name: '',
+        price: '',
+        orderBy: 'name'
+      },
+      loading: true 
+    };
   }
 
   componentDidMount() {
     this.populateData();
   }
 
+  handleChange(inputName, event) {
+    this.setState({
+      filter: {...this.state.filter, [inputName]: event.target.value}
+    });
+  }
+  
   static renderDataTable(data) {
     return (
       <table className='table table-striped' aria-labelledby="tabelLabel">
@@ -19,17 +33,13 @@ export class FilteringSorting extends Component {
           <tr>
             <th>1</th>
             <th>2</th>
-            <th>3</th>
-            <th>4</th>
           </tr>
         </thead>
         <tbody>
           {data.map(data =>
-            <tr key={data.date}>
-              <td>{data.date}</td>
-              <td>{data.temperatureC}</td>
-              <td>{data.temperatureF}</td>
-              <td>{data.summary}</td>
+            <tr key={data.id}>
+              <td>{data.name}</td>
+              <td>{data.price}</td>
             </tr>
           )}
         </tbody>
@@ -45,31 +55,54 @@ export class FilteringSorting extends Component {
     return (
       <div>
         <h1 id="tabelLabel" >Filtering & Sorting</h1>
-        <div>
-          <table>
-            <tr>
-              <td>Name</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>Price</td>
-              <td></td>
-            </tr>
-            <tr>
-              <td>Sort By</td>
-              <td></td>
-            </tr>
+        <form onSubmit={this.onFilter.bind(this)}>
+          <table className="table">
+            <tbody>
+              <tr>
+                <td>Name</td>
+                <td><input type="text" value={this.state.filter.name} onChange={this.handleChange.bind(this, 'name')} /></td>
+              </tr>
+              <tr>
+                <td>Price</td>
+                <td><input type="text" value={this.state.filter.price} onChange={this.handleChange.bind(this, 'price')} /></td>
+              </tr>
+              <tr>
+                <td>Sort By</td>
+                <td>
+                  <select value={this.state.filter.orderBy} onChange={this.handleChange.bind(this, 'orderBy')}>
+                    <option value="name">Name</option>
+                    <option value="price">Price</option>
+                  </select>
+                </td>
+              </tr>
+            </tbody>
           </table>
-        </div>
+
+          <br/>
+          <input className="btn btn-primary" type="submit" value="Filter" />
+          <br/>
+        </form>
+        <br/>
         {contents}
       </div>
     );
   }
 
   async populateData() {
-    //const token = await authService.getAccessToken();
-    const response = await fetch('api/products', {});
+    const esc = encodeURIComponent;
+    const query = Object.keys(this.state.filter)
+        .map(k => esc(k) + '=' + (this.state.filter[k] ? esc(this.state.filter[k]) : ''))
+        .join('&');
+    
+    const response = await fetch('api/products?' + query);
     const data = await response.json();
     this.setState({ data: data, loading: false });
+  }
+
+  onFilter(e) {
+    console.log('da')
+    this.populateData();
+    e.preventDefault();
+    return false;
   }
 }

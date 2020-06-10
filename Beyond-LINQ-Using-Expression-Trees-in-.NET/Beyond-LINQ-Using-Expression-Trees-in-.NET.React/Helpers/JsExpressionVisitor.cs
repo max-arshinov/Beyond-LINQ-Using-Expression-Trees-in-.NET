@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace Beyond_LINQ_Using_Expression_Trees_in_.NET.React.Helpers
 {
