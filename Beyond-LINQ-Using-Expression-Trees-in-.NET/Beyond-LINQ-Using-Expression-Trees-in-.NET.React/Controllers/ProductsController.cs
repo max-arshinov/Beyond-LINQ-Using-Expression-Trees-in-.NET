@@ -1,4 +1,6 @@
 using System.Linq;
+using AutoMapper;
+using Beyond_LINQ_Using_Expression_Trees_in_.NET.React.Data;
 using Beyond_LINQ_Using_Expression_Trees_in_.NET.React.Models;
 using Force.Ddd;
 using Force.Linq;
@@ -11,37 +13,26 @@ namespace Beyond_LINQ_Using_Expression_Trees_in_.NET.React.Controllers
     [Route("api/[controller]")]
     public class ProductsController: Controller
     {
+        private readonly ApplicationDbContext _dbContext;
+        private readonly IMapper _mapper;
+
+        public ProductsController(ApplicationDbContext dbContext, IMapper mapper)
+        {
+            _dbContext = dbContext;
+            _mapper = mapper;
+        }
+
         [HttpGet]
         public IActionResult Get([FromServices] DbContext dbContext,
             [FromQuery] ProductFilter productFilter,
             [FromQuery] string orderBy)
         {
-            var spec = SpecBuilder<Product>.Build(productFilter);
+            var spec = SpecBuilder<ProductListDto>.Build(productFilter);
 
-            var q = new[]
-                {
-                    new Product()
-                    {
-                        Id = 1,
-                        Name = "MacBook 16",
-                        Price = 100
-                    },
-                    new Product()
-                    {
-                        Id = 2,
-                        Name = "MacBook 15",
-                        Price = 200
-                    },
-                    new Product()
-                    {
-                        Id = 3,
-                        Name = "Dell",
-                        Price = 300
-                    },
-                }
-                .AsQueryable()
+            var q = _mapper
+                .ProjectTo<ProductListDto>(_dbContext.Products)
                 .Where(spec);
-
+            
             if (orderBy != null)
             {
                 q = q.OrderBy(orderBy);

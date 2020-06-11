@@ -11,6 +11,8 @@ using Beyond_LINQ_Using_Expression_Trees_in_.NET.React.Models;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using AutoMapper;
+using Beyond_LINQ_Using_Expression_Trees_in_.NET.React.AutoMapper;
 
 namespace Beyond_LINQ_Using_Expression_Trees_in_.NET.React
 {
@@ -45,6 +47,14 @@ namespace Beyond_LINQ_Using_Expression_Trees_in_.NET.React
 
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration => { configuration.RootPath = "ClientApp/build"; });
+
+            var mappingConfig = new MapperConfiguration(mc =>
+            {
+                mc.AddProfile(new MappingProfile());
+            });
+
+            IMapper mapper = mappingConfig.CreateMapper();
+            services.AddSingleton(mapper);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

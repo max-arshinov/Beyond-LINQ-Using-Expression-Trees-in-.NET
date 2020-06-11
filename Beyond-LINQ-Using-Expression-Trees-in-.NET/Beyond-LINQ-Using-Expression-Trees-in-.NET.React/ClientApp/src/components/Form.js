@@ -16,6 +16,14 @@ export class Form extends Component {
     this.formRef = React.createRef();
   }
 
+  componentDidMount() {
+    this.populateData();
+  }
+
+  async populateData() {
+
+  }
+
   onSubmit(evt) {
     evt.preventDefault()
     const value = this.formRef.current.getValue();

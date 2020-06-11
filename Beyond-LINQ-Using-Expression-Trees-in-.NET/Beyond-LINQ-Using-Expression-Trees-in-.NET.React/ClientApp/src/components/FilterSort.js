@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-export class FilteringSorting extends Component {
-  static displayName = FilteringSorting.name;
+export class FilterSort extends Component {
+  static displayName = FilterSort.name;
 
   constructor(props) {
     super(props);
@@ -50,11 +50,11 @@ export class FilteringSorting extends Component {
   render() {
     let contents = this.state.loading
       ? <p><em>Loading...</em></p>
-      : FilteringSorting.renderDataTable(this.state.data);
+      : FilterSort.renderDataTable(this.state.data);
 
     return (
       <div>
-        <h1 id="tabelLabel" >Filtering & Sorting</h1>
+        <h1 id="tabelLabel" >Filter & Sort</h1>
         <form onSubmit={this.onFilter.bind(this)}>
           <table className="table">
             <tbody>
