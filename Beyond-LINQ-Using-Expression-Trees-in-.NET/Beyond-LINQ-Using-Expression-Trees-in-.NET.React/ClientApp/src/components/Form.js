@@ -27,7 +27,6 @@ export class Form extends Component {
     const data = await response.json();
     const price = t.refinement(t.Number, eval(data.predicate));
     price.getValidationErrorMessage = () => data.errorMessage;
-    console.log(price.getValidationErrorMessage())
     this.setState({
       formSchema: t.struct({
         name: t.String,
