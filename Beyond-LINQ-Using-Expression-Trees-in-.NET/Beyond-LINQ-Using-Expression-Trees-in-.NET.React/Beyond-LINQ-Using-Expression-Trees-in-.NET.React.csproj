@@ -11,8 +11,9 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Force" Version="3.1.0-alpha1" />
         <PackageReference Include="AutoMapper" Version="9.0.0" />
+        <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
+        <PackageReference Include="Force" Version="3.1.0-alpha1" />
     </ItemGroup>
     <ItemGroup>
         <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="3.1.4" />
