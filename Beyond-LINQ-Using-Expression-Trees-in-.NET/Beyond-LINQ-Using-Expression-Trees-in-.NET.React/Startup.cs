@@ -73,6 +73,11 @@ namespace Beyond_LINQ_Using_Expression_Trees_in_.NET.React
                 app.UseHttpsRedirection();
             }
 
+            using (var scope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
+            {
+                scope.ServiceProvider.GetService<ApplicationDbContext>().Database.Migrate();
+            }
+
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
 

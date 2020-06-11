@@ -29,6 +29,13 @@ namespace Beyond_LINQ_Using_Expression_Trees_in_.NET.React.Controllers
         {
             var spec = SpecBuilder<ProductListDto>.Build(productFilter);
 
+            // _dbContext.Products.Select(x =>
+            //     new ProductListDto{
+            //         Id = x.Id,
+            //         Name = x.Name,
+            //         CategoryName = x.Category.Name
+            //     });
+            
             var q = _mapper
                 .ProjectTo<ProductListDto>(_dbContext.Products)
                 .Where(spec);

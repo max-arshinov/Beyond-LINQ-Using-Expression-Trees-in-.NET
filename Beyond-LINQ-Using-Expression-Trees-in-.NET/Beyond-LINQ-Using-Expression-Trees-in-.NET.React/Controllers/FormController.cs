@@ -12,8 +12,12 @@ namespace Beyond_LINQ_Using_Expression_Trees_in_.NET.React.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            Expression<Func<int, bool>> forAdultsOnly = x => x > 18;
-            return Ok(JsExpressionVisitor.ExpressionToString(forAdultsOnly));
+            Expression<Func<double, bool>> expression = x => x > 100;
+            return Ok(new
+            {
+                Predicate = JsExpressionVisitor.ExpressionToString(expression),
+                ErrorMessage = "Price must > 100"
+            });
         }
     }
 }
