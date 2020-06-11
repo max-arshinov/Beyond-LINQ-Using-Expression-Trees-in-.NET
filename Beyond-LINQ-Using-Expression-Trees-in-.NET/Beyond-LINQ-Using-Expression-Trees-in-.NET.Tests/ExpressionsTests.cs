@@ -3,6 +3,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using BenchmarkDotNet.Reports;
 using BenchmarkDotNet.Running;
+using Beyond_LINQ_Using_Expression_Trees_in_.NET.React.Models;
 using Xunit;
 
 namespace Beyond_LINQ_Using_Expression_Trees_in_.NET.Tests
@@ -83,13 +84,19 @@ namespace Beyond_LINQ_Using_Expression_Trees_in_.NET.Tests
         }
 
         [Fact]
-        public void PredicateBuilder_Works_ExpressionTreeTheSame()
+        public void PredicateBuilder_Works_ExpressionTreeIsTheSame()
         {
             var less1OrGreater3 = 
                 BuildAndAssertOrElseExpression(PredicateBuilder.Or);
             
             Assert.Equal(Less1OrGreater3Manual.ToString(), 
                 less1OrGreater3.ToString());
+        }
+
+        [Fact]
+        public void Spec_From()
+        {
+            var niceProductsSpec = Category.NiceRating.From<Product>(x => x.Category);
         }
     }
 }
