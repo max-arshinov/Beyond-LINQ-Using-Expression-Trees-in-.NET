@@ -31,13 +31,15 @@ export class FilterSort extends Component {
       <table className='table table-striped' aria-labelledby="tabelLabel">
         <thead>
           <tr>
-            <th>1</th>
-            <th>2</th>
+            <th>Category</th>
+            <th>Name</th>
+            <th>Price</th>
           </tr>
         </thead>
         <tbody>
           {data.map(data =>
             <tr key={data.id}>
+              <td>{data.categoryName}</td>
               <td>{data.name}</td>
               <td>{data.price}</td>
             </tr>
