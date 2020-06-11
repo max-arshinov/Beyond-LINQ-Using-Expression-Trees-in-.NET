@@ -23,5 +23,14 @@ namespace Beyond_LINQ_Using_Expression_Trees_in_.NET.Tests
     public class Baz
     {
         public virtual string Name { get; set; }
+
+        public Baz()
+        {
+        }
+        
+        public Baz(string name)
+        {
+            Name = name;
+        }
     }
 }

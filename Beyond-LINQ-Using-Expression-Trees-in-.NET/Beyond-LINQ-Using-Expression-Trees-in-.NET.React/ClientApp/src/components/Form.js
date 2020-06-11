@@ -16,6 +16,21 @@ export class Form extends Component {
     this.formRef = React.createRef();
   }
 
+  componentDidMount() {
+    this.populateData();
+  }
+
+  async populateData() {
+    const esc = encodeURIComponent;
+    const query = Object.keys(this.state.filter)
+        .map(k => esc(k) + '=' + (this.state.filter[k] ? esc(this.state.filter[k]) : ''))
+        .join('&');
+
+    const response = await fetch('api/products?' + query);
+    const data = await response.json();
+    this.setState({ data: data, loading: false });
+  }
+
   onSubmit(evt) {
     evt.preventDefault()
     const value = this.formRef.current.getValue();
