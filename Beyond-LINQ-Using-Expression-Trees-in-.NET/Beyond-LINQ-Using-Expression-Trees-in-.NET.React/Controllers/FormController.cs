@@ -16,7 +16,7 @@ namespace Beyond_LINQ_Using_Expression_Trees_in_.NET.React.Controllers
             return Ok(new
             {
                 Predicate = JsExpressionVisitor.ExpressionToString(expression),
-                ErrorMessage = "Price must be more than 100"
+                ErrorMessage = "Price must > 100"
             });
         }
     }
