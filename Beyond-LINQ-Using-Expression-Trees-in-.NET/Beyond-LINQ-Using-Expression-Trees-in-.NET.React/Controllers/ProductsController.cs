@@ -29,10 +29,10 @@ namespace Beyond_LINQ_Using_Expression_Trees_in_.NET.React.Controllers
         {
             var spec = SpecBuilder<ProductListDto>.Build(productFilter);
 
-
-            var q = _mapper.ProjectTo<ProductListDto>(_dbContext.Products).Where(spec);
-
-
+            var q = _mapper
+                .ProjectTo<ProductListDto>(_dbContext.Products)
+                .Where(spec);
+            
             if (orderBy != null)
             {
                 q = q.OrderBy(orderBy);
